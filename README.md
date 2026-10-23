@@ -1,6 +1,6 @@
 # Shopee Conversion Notifications
 
-A small web app for Shopee Affiliate conversion reports and Telegram summaries. It polls the AddLiveTag conversions API every 15 seconds and sends a Telegram message when today's order count or estimated commission changes. It also sends a summary after monitoring starts and after the Vietnam date rolls over, including zero-order days. GMV is omitted from Telegram messages.
+A small web app for Shopee Affiliate conversion reports and Telegram summaries. It polls the AddLiveTag conversions API every 10 minutes and sends a Telegram message when today's order count or estimated commission changes. It also sends a summary after monitoring starts and after the Vietnam date rolls over, including zero-order days. GMV is omitted from Telegram messages.
 
 ## Deploy
 
