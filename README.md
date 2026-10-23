@@ -18,7 +18,7 @@ After deployment, open the service URL and sign in with username `admin` and the
 2. Create a Telegram bot with `@BotFather`, send `/start` to the bot, then enter its token and use **Find Chat ID**.
 3. Send a test Telegram message, then click **Start phone notifications**.
 
-The AddLiveTag API key and Telegram token are accepted through the dashboard and kept only in the running process memory; they are not stored in this repository. The notification monitor also runs in process memory. If the host restarts or sleeps the service, open the dashboard and start monitoring again. Use an always-on host for uninterrupted notifications.
+Dashboard fields (including API keys and tokens) are saved in this browser’s local storage so they remain after a page reload. They are also sent to the server over HTTPS for API requests and held in process memory while monitoring; they are not stored in this repository. Use **Clear saved information** to remove them from this browser. The notification monitor also runs in process memory. A page reload restores the saved fields and shows whether monitoring is still running. If the host restarts or sleeps the service, open the dashboard and start monitoring again. Use an always-on host for uninterrupted notifications.
 
 ## Local run
 
