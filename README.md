@@ -2,7 +2,13 @@
 
 A small web app for Shopee Affiliate conversion reports and Telegram summaries. It polls the AddLiveTag conversions API every 10 minutes and sends a Telegram message when today's order count or estimated commission changes. It also sends a summary after monitoring starts and after the Vietnam date rolls over, including zero-order days. GMV is omitted from Telegram messages.
 
-## Deploy
+## Deploy on Render
+
+This repository includes `render.yaml` for a Render Blueprint. In Render, choose **New → Blueprint**, connect `luanluan12/noti_shopee`, and create the Blueprint. Render prompts for `DASHBOARD_PASSWORD`; enter a strong password there. The included Blueprint selects the Free plan to avoid creating a paid resource automatically. After deploy, sign in as `admin` with the password you set.
+
+Render Free web services spin down after 15 minutes without inbound traffic, so they do not provide reliable 24/7 background monitoring when the dashboard is closed. For continuous notifications, upgrade the service to a paid always-on web service in Render. Upgrade cost is shown by Render before you confirm it.
+
+## Other hosts
 
 Deploy this repository as a Python web service on a host that supports a `Procfile` and provides a `PORT` environment variable.
 
@@ -10,7 +16,7 @@ Set this environment variable in the hosting dashboard before deploying:
 
 - `DASHBOARD_PASSWORD`: a strong password for the web dashboard. The username is `admin`.
 
-The app binds to `0.0.0.0` when `PORT` is provided and refuses to start on a public host if `DASHBOARD_PASSWORD` is missing. The host should provide HTTPS so browser credentials and API keys are protected in transit.
+The app binds to `0.0.0.0` when `PORT` is provided and refuses to start on a public host if `DASHBOARD_PASSWORD` is missing. Render provides HTTPS for web services.
 
 After deployment, open the service URL and sign in with username `admin` and the password you configured. In the app:
 

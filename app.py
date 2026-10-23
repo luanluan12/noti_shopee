@@ -148,6 +148,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(status); self.send_header('Content-Type','application/json; charset=utf-8'); self.send_header('Content-Length',str(len(body))); self.send_header('Cache-Control','no-store'); self.end_headers(); self.wfile.write(body)
     def read_json(self): return json.loads(self.rfile.read(int(self.headers.get('Content-Length','0'))))
     def do_GET(self):
+        if self.path=='/healthz':
+            self.send_json(200,{'ok':True}); return
         if not self.authorized(): return
         if self.path=='/api/monitor/status':
             with monitor_lock: data=dict(monitor_state)
