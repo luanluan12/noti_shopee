@@ -87,7 +87,11 @@ def daily_conversion_summary(api_key, now, account_id=''):
     if account_id: params['account_id']=account_id
     url='https://addlivetag.com/api/v1/conversions.php?'+urlencode(params)
     request=urllib.request.Request(url,headers={'X-API-Key':api_key,'Accept':'application/json'},method='GET')
-    with urllib.request.urlopen(request,timeout=30) as response: result=json.loads(response.read().decode())
+    try:
+        with urllib.request.urlopen(request,timeout=30) as response: result=json.loads(response.read().decode())
+    except urllib.error.HTTPError as exc:
+        detail=exc.read().decode(errors='replace').strip()
+        raise RuntimeError(f'AddLiveTag API trả lỗi {exc.code}: {detail or exc.reason}') from exc
     if not result.get('ok'): raise RuntimeError(result.get('error') or result.get('message') or 'AddLiveTag API báo lỗi.')
     summary=result.get('summary') or {}
     order_count=int(summary.get('orders',result.get('meta',{}).get('total',0)) or 0)
